@@ -3,9 +3,9 @@ package com.example.sergio.miapp;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,32 +16,28 @@ import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
-import com.mobsandgeeks.saripaar.annotation.Checked;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements Validator.ValidationListener {
 
 
+    private static String PREFS = "PREFS";
+    Validator validator;
+    LottieAnimationView lottieAnimationView;
+    Handler setDelay;
+    Runnable startDelay;
     @NotEmpty(message = "No puede estar en blanco")
     @Email(message = "Debe ingresar un email válido")
     private EditText eTLemail;
-
     @Password(message = "Debe contener Mayus, num y minuscula", min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
     private EditText eTLpass;
     private CheckBox checkBox;
     private Button login;
     private TextView txtToda, txtReg;
-    Validator validator;
-    private static String PREFS = "PREFS";
-    LottieAnimationView lottieAnimationView;
-    Handler setDelay;
-    Runnable startDelay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +68,10 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
         receiveData();
 
         //Botón login
-        login.setOnClickListener(new View.OnClickListener(){
+        login.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 lottieAnimationView.setVisibility(View.VISIBLE);
                 txtToda.setVisibility(View.INVISIBLE);
                 txtReg.setVisibility(View.INVISIBLE);
@@ -98,7 +94,6 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
                 setDelay.postDelayed(startDelay, 3550);
 
 
-
             }
         });
     }
@@ -108,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
     /////funciones para guardar email en login///////
     /////////////////////////////////////////////////
     /////////////////////////////////////////////////
-    public void saveData(){
+    public void saveData() {
         String username = eTLemail.getText().toString();
 
         SharedPreferences preferences = getSharedPreferences(PREFS, 0);
@@ -117,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
         editor.commit();
     }
 
-    public void receiveData(){
+    public void receiveData() {
         SharedPreferences preferences = getSharedPreferences(PREFS, 0);
         String username = preferences.getString("USERNAME", null);
 
@@ -146,9 +141,9 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
     @Override
     public void onValidationSucceeded() {
         Toast.makeText(this, "Correcto!", Toast.LENGTH_SHORT).show();
-        if(checkBox.isChecked()){
+        if (checkBox.isChecked()) {
             saveData();
-            Toast.makeText(LoginActivity.this,"Recordar usuario guardado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Recordar usuario guardado", Toast.LENGTH_SHORT).show();
         }
 
         //Introducir aquí código login//
@@ -186,7 +181,6 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
     //////////////////////////////////////////////////
     //////////////////////////////////////////////////
     //////////////////////////////////////////////////
-
 
 
 }

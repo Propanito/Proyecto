@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -16,35 +15,31 @@ import android.widget.TextView;
 
 public class SliderAdapter extends PagerAdapter {
 
-    Context context;
-    LayoutInflater layoutInflater;
-
-
-    public SliderAdapter(Context context){
-        this.context = context;
-    }
-
     //Lista de imagenes
     public int[] slider_images = {
-        R.drawable.logo1,
-        R.drawable.logo2,
-        R.drawable.logo3,
-        R.drawable.logo4
+            R.drawable.logo1,
+            R.drawable.logo2,
+            R.drawable.logo3,
+            R.drawable.logo4
     };
-
     public String[] slide_headings = {
             "Texto 1",
             "Texto 2",
             "Texto 3",
             "Texto 4"
     };
-
     public String[] slide_descs = {
             "Descripcion 1",
             "Descripcion 2",
             "Descripcion 3",
             "Descripcion 4"
     };
+    Context context;
+    LayoutInflater layoutInflater;
+
+    public SliderAdapter(Context context) {
+        this.context = context;
+    }
 
     @Override
     public int getCount() {
@@ -53,13 +48,13 @@ public class SliderAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object o) {
-        return view==(RelativeLayout)o;
+        return view == (RelativeLayout) o;
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.slide_layout,container,false);
+        View view = layoutInflater.inflate(R.layout.slide_layout, container, false);
 
 
         ImageView slideImageView = (ImageView) view.findViewById(R.id.slide_image);
@@ -77,6 +72,6 @@ public class SliderAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((RelativeLayout)object);
+        container.removeView((RelativeLayout) object);
     }
 }

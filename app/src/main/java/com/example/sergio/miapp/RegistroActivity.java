@@ -2,8 +2,8 @@ package com.example.sergio.miapp;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,15 +21,15 @@ import com.mobsandgeeks.saripaar.annotation.Password;
 
 import java.util.List;
 
-public class RegistroActivity extends AppCompatActivity implements Validator.ValidationListener{
+public class RegistroActivity extends AppCompatActivity implements Validator.ValidationListener {
 
+    Validator validator;
     @Min(value = 5, message = "Debe contener más de 5 letras")
     @NotEmpty(message = "No puede estar en blanco")
 
     private EditText eTRuser;
     @Email(message = "Debe ingresar un email válido")
     private EditText eTLemail;
-
     @Password(message = "Debe contener Mayus, num y minuscula", min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
     private EditText eTRpass;
     @ConfirmPassword(message = "Las contraseñas no coinciden")
@@ -38,7 +38,6 @@ public class RegistroActivity extends AppCompatActivity implements Validator.Val
     private CheckBox checkTerm;
     private Button registrar;
 
-    Validator validator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,11 +55,10 @@ public class RegistroActivity extends AppCompatActivity implements Validator.Val
         validator.setValidationListener(this);
 
 
-
         //Botón registrar
-        registrar.setOnClickListener(new View.OnClickListener(){
+        registrar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 validator.validate();
             }
         });

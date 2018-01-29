@@ -2,6 +2,7 @@ package com.example.sergio.miapp;
 
 import android.app.FragmentManager;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -9,19 +10,18 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
-import com.example.sergio.miapp.Fragments.PsnFragment;
 import com.example.sergio.miapp.Fragments.PcFragment;
+import com.example.sergio.miapp.Fragments.PsnFragment;
 import com.example.sergio.miapp.Fragments.XboxFragment;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +54,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -85,7 +86,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             //Aquí va el code de opciones
-            Toast.makeText(HomeActivity.this,"Botón opciones pulsado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(HomeActivity.this, "Botón opciones pulsado", Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -98,13 +99,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         FragmentManager fm = getFragmentManager();
         int id = item.getItemId();
 
-        if (id == R.id.nav_camara) {
+        if (id == R.id.nav_pc) {
             fm.beginTransaction().replace(R.id.content_frame, new PcFragment()).commit();
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_psn) {
             fm.beginTransaction().replace(R.id.content_frame, new PsnFragment()).commit();
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_xbox) {
             fm.beginTransaction().replace(R.id.content_frame, new XboxFragment()).commit();
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_salir) {
             finish();
         }
 
