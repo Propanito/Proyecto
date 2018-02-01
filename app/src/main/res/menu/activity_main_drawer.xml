@@ -4,24 +4,24 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_pc"
-            android:icon="@android:drawable/ic_menu_camera"
+            android:icon="@drawable/pc"
             android:title="Pc" />
         <item
             android:id="@+id/nav_psn"
-            android:icon="@android:drawable/ic_menu_gallery"
+            android:icon="@drawable/psn"
             android:title="Psn" />
         <item
             android:id="@+id/nav_xbox"
-            android:icon="@android:drawable/ic_menu_slideshow"
+            android:icon="@drawable/xbox"
             android:title="Xbox" />
 
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Cerrar y ayuda">
         <menu>
             <item
                 android:id="@+id/nav_salir"
-                android:icon="@android:drawable/ic_menu_share"
+                android:icon="@drawable/logout"
                 android:title="Salir" />
 
         </menu>

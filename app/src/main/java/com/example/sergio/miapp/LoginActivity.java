@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
 
     private static String PREFS = "PREFS";
     Validator validator;
-    LottieAnimationView lottieAnimationView;
+    LottieAnimationView lottieAnimationView,backAnim;
     Handler setDelay;
     Runnable startDelay;
     @NotEmpty(message = "No puede estar en blanco")
@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
         checkBox = (CheckBox) findViewById(R.id.checkBox);
         txtToda = (TextView) findViewById(R.id.txtBajoLogin);
         txtReg = (TextView) findViewById(R.id.Registrar);
-
+        backAnim = (LottieAnimationView) findViewById(R.id.backAnim);
         setDelay = new Handler();
 
 
