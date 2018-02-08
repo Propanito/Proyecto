@@ -107,7 +107,10 @@ public class PcFragment extends Fragment implements View.OnClickListener, Search
                         try{
                             JSONObject json = new JSONObject(myResponse);
                             nom.setText(json.getString("epicUserHandle"));
+                            nom.setVisibility(View.VISIBLE);
+
                             puntua.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("trnRating").getString("displayValue"));
+                            puntua.setVisibility(View.VISIBLE);
                         }catch (JSONException  ioe){
                             result.setText("Error");
                         }
