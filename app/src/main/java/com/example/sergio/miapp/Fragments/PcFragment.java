@@ -40,11 +40,10 @@ import okhttp3.Response;
 
 public class PcFragment extends Fragment implements View.OnClickListener, SearchView.OnQueryTextListener {
 
-    private Button boton;
-    private TextView result,nom, puntua;
+    private TextView nom, puntua, wins,top10;
     private Context mContext;
     private OkHttpClient client;
-
+    private View view1;
     View v;
     private Context applicationContext;
 
@@ -62,7 +61,6 @@ public class PcFragment extends Fragment implements View.OnClickListener, Search
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_pc, container, false);
-        result = (TextView) v.findViewById(R.id.result);
         mContext = getActivity();
         
 
@@ -73,6 +71,12 @@ public class PcFragment extends Fragment implements View.OnClickListener, Search
         inflater.inflate(R.menu.search_menu, menu);
         nom = (TextView)v.findViewById(R.id.nombre);
         puntua = (TextView)v.findViewById(R.id.puntua);
+        wins = (TextView)v.findViewById(R.id.wins);
+        top10 = (TextView)v.findViewById(R.id.top10);
+
+
+        //barras blancas
+        view1 = (View) v.findViewById(R.id.view1);
         MenuItem searchItem = menu.findItem(R.id.searchview);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(this);
@@ -92,7 +96,7 @@ public class PcFragment extends Fragment implements View.OnClickListener, Search
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        result.setText("Error!");
+                        nom.setText("Error!");
                     }
                 });
             }
@@ -105,14 +109,23 @@ public class PcFragment extends Fragment implements View.OnClickListener, Search
                     @Override
                     public void run() {
                         try{
+                            //Llamadas json
                             JSONObject json = new JSONObject(myResponse);
+                            //Usuario
                             nom.setText(json.getString("epicUserHandle"));
                             nom.setVisibility(View.VISIBLE);
+                            view1.setVisibility(View.VISIBLE);
 
-                            puntua.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("trnRating").getString("displayValue"));
+                            puntua.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("score").getString("displayValue"));
                             puntua.setVisibility(View.VISIBLE);
+
+                            wins.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("top1").getString("displayValue"));
+                            wins.setVisibility(View.VISIBLE);
+
+                            top10.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("top10").getString("displayValue"));
+                            top10.setVisibility(View.VISIBLE);
                         }catch (JSONException  ioe){
-                            result.setText("Error");
+                            nom.setText("Error");
                         }
                     }
                 });
