@@ -2,8 +2,13 @@ package com.example.sergio.miapp.Fragments;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,9 +20,17 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sergio.miapp.Peticiones.Peticiones;
 import com.example.sergio.miapp.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -28,28 +41,38 @@ import okhttp3.Response;
 public class PcFragment extends Fragment implements View.OnClickListener, SearchView.OnQueryTextListener {
 
     private Button boton;
-    private TextView result;
-    private OkHttpClient client;
+    private TextView result,nom, puntua;
     private Context mContext;
+    private OkHttpClient client;
+
     View v;
+    private Context applicationContext;
+
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         mContext = getActivity();
+        client = new OkHttpClient();
         setHasOptionsMenu(true);
+
+
+
+
     }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_pc, container, false);
         result = (TextView) v.findViewById(R.id.result);
-        client = new OkHttpClient();
         mContext = getActivity();
+        
 
         return v;
     }
 
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.search_menu, menu);
+        nom = (TextView)v.findViewById(R.id.nombre);
+        puntua = (TextView)v.findViewById(R.id.puntua);
         MenuItem searchItem = menu.findItem(R.id.searchview);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(this);
@@ -60,8 +83,9 @@ public class PcFragment extends Fragment implements View.OnClickListener, Search
 
         super.onCreateOptionsMenu(menu, inflater);
     }
-    private void getWebservice(String s){
-        final Request request = new Request.Builder().url("https://api.fortnitetracker.com/v1/profile/pc/"+s).header("TRN-Api-Key", "f85627ed-3968-41ec-b182-bf5af72cb54d").build();
+
+    private void getWebservice(String s) {
+        final Request request = new Request.Builder().url("https://api.fortnitetracker.com/v1/profile/pc/"+s).header("TRN-Api-Key", "f85627ed-3968-41ec-b182-bf5af72cb54d").get().build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -74,13 +98,17 @@ public class PcFragment extends Fragment implements View.OnClickListener, Search
             }
 
             @Override
-            public void onResponse(Call call, final Response response) {
+            public void onResponse(Call call, final Response response)throws IOException  {
+
+                final String myResponse = response.body().string();
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         try{
-                            result.setText(response.body().string());
-                        }catch (IOException ioe){
+                            JSONObject json = new JSONObject(myResponse);
+                            nom.setText(json.getString("epicUserHandle"));
+                            puntua.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("trnRating").getString("displayValue"));
+                        }catch (JSONException  ioe){
                             result.setText("Error");
                         }
                     }
@@ -90,6 +118,7 @@ public class PcFragment extends Fragment implements View.OnClickListener, Search
     }
 
 
+    //Codigo searchview
     @Override
     public boolean onQueryTextSubmit(String s) {
         getWebservice(s);
@@ -102,8 +131,14 @@ public class PcFragment extends Fragment implements View.OnClickListener, Search
         return false;
     }
 
+
+    //Esto no se usa
     @Override
     public void onClick(View view) {
 
+    }
+
+    public Context getApplicationContext() {
+        return applicationContext;
     }
 }
