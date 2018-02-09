@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#80000000">
+    android:background="@drawable/bordesframe">
 
 
     <ScrollView
@@ -23,7 +23,7 @@
             android:layout_marginBottom="900dp">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/txtPartidasSolo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="500dp"
@@ -40,13 +40,14 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.484" />
 
+
             <View
                 android:id="@+id/view1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="470dp"
-                android:layout_marginEnd="80dp"
-                android:layout_marginStart="80dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginStart="60dp"
                 android:background="#fff"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +59,7 @@
                 android:id="@+id/txtNom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="405dp"
+                android:layout_marginBottom="400dp"
                 android:layout_marginEnd="227dp"
                 android:text="Nombre: "
                 android:textColor="#fff"
@@ -68,11 +69,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.484" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/nombre"
+                android:id="@+id/nombreSolo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="400dp"
@@ -89,14 +89,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.472" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/txtScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="345dp"
+                android:layout_marginBottom="350dp"
                 android:layout_marginEnd="208dp"
                 android:text="Puntuación:"
                 android:textColor="#fff"
@@ -106,11 +105,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.484" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/puntua"
+                android:id="@+id/puntuaSolo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="350dp"
@@ -131,7 +129,7 @@
                 android:id="@+id/txtWins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="285dp"
+                android:layout_marginBottom="300dp"
                 android:layout_marginEnd="225dp"
                 android:text="Victorias:"
                 android:textColor="#fff"
@@ -141,14 +139,13 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.484" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/wins"
+                android:id="@+id/winsSolo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="290dp"
+                android:layout_marginBottom="300dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="170dp"
                 android:fontFamily="@font/actor"
@@ -163,12 +160,215 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/txtTop10"
+                android:id="@+id/txtTop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="225dp"
+                android:layout_marginBottom="250dp"
                 android:layout_marginEnd="235dp"
                 android:text="Top 10:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/top10Solo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="250dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTop25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="200dp"
+                android:layout_marginEnd="235dp"
+                android:text="Top 25:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/top25Solo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="200dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtKd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="150dp"
+                android:layout_marginEnd="253dp"
+                android:text="K/D:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/kdSolo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="150dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtParti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
+                android:layout_marginEnd="167dp"
+                android:text="Partidas jugadas:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/partiSolo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtBajas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:layout_marginEnd="245dp"
+                android:text="Bajas:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/bajasSolo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTjugado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="180dp"
+                android:text="Tiempo jugado:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/jugadoSolo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtPartidasDuo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="150dp"
+                android:layout_marginStart="150dp"
+                android:layout_marginTop="60dp"
+                android:text="Partidas en solitario "
                 android:textColor="#fff"
                 android:textSize="15dp"
                 android:textStyle="bold"
@@ -179,11 +379,277 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.484" />
 
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="75dp"
+                android:background="#fff"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
-                android:id="@+id/top10"
+                android:id="@+id/txtScoreDuo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="208dp"
+                android:layout_marginTop="100dp"
+                android:text="Puntuación:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/puntuaSolo2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="235dp"
+                android:layout_marginBottom="350dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:fontFamily="@font/actor"
+                android:text="Puntuación:  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtWinsDuo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="300dp"
+                android:layout_marginEnd="225dp"
+                android:text="Victorias:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/winsSolo2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="300dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTop10Duo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="250dp"
+                android:layout_marginEnd="235dp"
+                android:text="Top 10:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/top10Solo2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="250dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTop25Duo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="200dp"
+                android:layout_marginEnd="235dp"
+                android:text="Top 25:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/top25Solo2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="200dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtKdDuo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="150dp"
+                android:layout_marginEnd="253dp"
+                android:text="K/D:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/kdDuo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="150dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtPartiDuo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
+                android:layout_marginEnd="167dp"
+                android:text="Partidas jugadas:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/partiDuo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtBajas4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:layout_marginEnd="245dp"
+                android:text="Bajas:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/bajasDuo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTjugadoDuo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="180dp"
+                android:text="Tiempo jugado:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/jugadoDuo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="170dp"
                 android:fontFamily="@font/actor"

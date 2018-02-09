@@ -40,7 +40,13 @@ import okhttp3.Response;
 
 public class PcFragment extends Fragment implements View.OnClickListener, SearchView.OnQueryTextListener {
 
-    private TextView nom, puntua, wins,top10;
+    //Variables solo
+    private TextView nomSolo, puntuaSolo, winsSolo,top10Solo,top25Solo, kdSolo, partiSolo, bajasSolo, jugadoSolo;
+
+    //Variables Duo
+    private TextView puntuaDuo, winsDuo,top10Duo,top25Duo, kdDuo, partiDuo, bajasDuo, jugadoDuo;
+
+    //-----------------
     private Context mContext;
     private OkHttpClient client;
     private View view1;
@@ -69,11 +75,25 @@ public class PcFragment extends Fragment implements View.OnClickListener, Search
 
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.search_menu, menu);
-        nom = (TextView)v.findViewById(R.id.nombre);
-        puntua = (TextView)v.findViewById(R.id.puntua);
-        wins = (TextView)v.findViewById(R.id.wins);
-        top10 = (TextView)v.findViewById(R.id.top10);
+        nomSolo = (TextView)v.findViewById(R.id.nombreSolo);
+        puntuaSolo = (TextView)v.findViewById(R.id.puntuaSolo);
+        winsSolo = (TextView)v.findViewById(R.id.winsSolo);
+        top10Solo = (TextView)v.findViewById(R.id.top10Solo);
+        top25Solo = (TextView)v.findViewById(R.id.top25Solo);
+        kdSolo = (TextView)v.findViewById(R.id.kdSolo);
+        partiSolo = (TextView)v.findViewById(R.id.partiSolo);
+        bajasSolo = (TextView)v.findViewById(R.id.bajasSolo);
+        jugadoSolo = (TextView)v.findViewById(R.id.jugadoSolo);
 
+        //Variables duo
+        puntuaDuo = (TextView)v.findViewById(R.id.puntuaDuo);
+        winsDuo = (TextView)v.findViewById(R.id.winsDuo);
+        top10Duo = (TextView)v.findViewById(R.id.top10Duo);
+        top25Duo = (TextView)v.findViewById(R.id.top25Duo);
+        kdDuo = (TextView)v.findViewById(R.id.kdDuo);
+        partiDuo = (TextView)v.findViewById(R.id.partiDuo);
+        bajasDuo = (TextView)v.findViewById(R.id.bajasDuo);
+        jugadoDuo = (TextView)v.findViewById(R.id.jugadoDuo);
 
         //barras blancas
         view1 = (View) v.findViewById(R.id.view1);
@@ -96,7 +116,7 @@ public class PcFragment extends Fragment implements View.OnClickListener, Search
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        nom.setText("Error!");
+                        nomSolo.setText("Error!");
                     }
                 });
             }
@@ -111,21 +131,84 @@ public class PcFragment extends Fragment implements View.OnClickListener, Search
                         try{
                             //Llamadas json
                             JSONObject json = new JSONObject(myResponse);
-                            //Usuario
-                            nom.setText(json.getString("epicUserHandle"));
-                            nom.setVisibility(View.VISIBLE);
+
+                            //Barras blancas
                             view1.setVisibility(View.VISIBLE);
 
-                            puntua.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("score").getString("displayValue"));
-                            puntua.setVisibility(View.VISIBLE);
+                            //Usuario
+                            nomSolo.setText(json.getString("epicUserHandle"));
+                            nomSolo.setVisibility(View.VISIBLE);
 
-                            wins.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("top1").getString("displayValue"));
-                            wins.setVisibility(View.VISIBLE);
+                            //Variables SOLO
 
-                            top10.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("top10").getString("displayValue"));
-                            top10.setVisibility(View.VISIBLE);
+                            //Puntuación solo
+                            puntuaSolo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("score").getString("displayValue"));
+                            puntuaSolo.setVisibility(View.VISIBLE);
+
+                            //Victorias solo
+                            winsSolo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("top1").getString("displayValue"));
+                            winsSolo.setVisibility(View.VISIBLE);
+
+                            //Top 10 solo
+                            top10Solo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("top10").getString("displayValue"));
+                            top10Solo.setVisibility(View.VISIBLE);
+
+                            //Top 25 solo
+                            top25Solo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("top25").getString("displayValue"));
+                            top25Solo.setVisibility(View.VISIBLE);
+
+                            //K/d solo
+                            kdSolo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("kd").getString("displayValue"));
+                            kdSolo.setVisibility(View.VISIBLE);
+
+                            //Partidas jugadas solo
+                            partiSolo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("matches").getString("displayValue"));
+                            partiSolo.setVisibility(View.VISIBLE);
+
+                            //Bajas solo
+                            bajasSolo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("kills").getString("displayValue"));
+                            bajasSolo.setVisibility(View.VISIBLE);
+
+                            //Tiempo jugado solo
+                            jugadoSolo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("minutesPlayed").getString("displayValue"));
+                            jugadoSolo.setVisibility(View.VISIBLE);
+
+                            //Variables DUO
+
+                            puntuaSolo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("score").getString("displayValue"));
+                            puntuaSolo.setVisibility(View.VISIBLE);
+
+                            //Victorias duo
+                            winsSolo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("top1").getString("displayValue"));
+                            winsSolo.setVisibility(View.VISIBLE);
+
+                            //Top 10 duo
+                            top10Solo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("top10").getString("displayValue"));
+                            top10Solo.setVisibility(View.VISIBLE);
+
+                            //Top 25 duo
+                            top25Solo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("top25").getString("displayValue"));
+                            top25Solo.setVisibility(View.VISIBLE);
+
+                            //K/d duo
+                            kdSolo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("kd").getString("displayValue"));
+                            kdSolo.setVisibility(View.VISIBLE);
+
+                            //Partidas jugadas duo
+                            partiSolo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("matches").getString("displayValue"));
+                            partiSolo.setVisibility(View.VISIBLE);
+
+                            //Bajas duo
+                            bajasSolo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("kills").getString("displayValue"));
+                            bajasSolo.setVisibility(View.VISIBLE);
+
+                            //Tiempo jugado duo
+                            jugadoDuo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("minutesPlayed").getString("displayValue"));
+                            jugadoDuo.setVisibility(View.VISIBLE);
+
+
                         }catch (JSONException  ioe){
-                            nom.setText("Error");
+                            nomSolo.setText("Error");
                         }
                     }
                 });
