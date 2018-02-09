@@ -10,7 +10,7 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -18,7 +18,7 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="1000dp"
+            android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_marginBottom="900dp">
 
@@ -42,7 +42,7 @@
 
 
             <View
-                android:id="@+id/view1"
+                android:id="@+id/barra1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="470dp"
@@ -367,8 +367,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="150dp"
                 android:layout_marginStart="150dp"
-                android:layout_marginTop="60dp"
-                android:text="Partidas en solitario "
+                android:layout_marginTop="70dp"
+                android:text="Partidas en Duo "
                 android:textColor="#fff"
                 android:textSize="15dp"
                 android:textStyle="bold"
@@ -380,12 +380,12 @@
                 app:layout_constraintVertical_bias="0.484" />
 
             <View
-                android:id="@+id/view3"
+                android:id="@+id/barra2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginEnd="60dp"
                 android:layout_marginStart="60dp"
-                android:layout_marginTop="75dp"
+                android:layout_marginTop="85dp"
                 android:background="#fff"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -398,7 +398,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="208dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="130dp"
                 android:text="Puntuación:"
                 android:textColor="#fff"
                 android:textSize="15dp"
@@ -410,12 +410,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/puntuaSolo2"
+                android:id="@+id/puntuaDuo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="350dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="170dp"
+                android:layout_marginTop="130dp"
                 android:fontFamily="@font/actor"
                 android:text="Puntuación:  "
                 android:textColor="#fff"
@@ -431,8 +431,8 @@
                 android:id="@+id/txtWinsDuo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="300dp"
                 android:layout_marginEnd="225dp"
+                android:layout_marginTop="180dp"
                 android:text="Victorias:"
                 android:textColor="#fff"
                 android:textSize="15dp"
@@ -444,12 +444,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/winsSolo2"
+                android:id="@+id/winsDuo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="300dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="170dp"
+                android:layout_marginTop="180dp"
                 android:fontFamily="@font/actor"
                 android:text="  "
                 android:textColor="#fff"
@@ -465,8 +465,8 @@
                 android:id="@+id/txtTop10Duo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="250dp"
                 android:layout_marginEnd="235dp"
+                android:layout_marginTop="230dp"
                 android:text="Top 10:"
                 android:textColor="#fff"
                 android:textSize="15dp"
@@ -478,12 +478,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/top10Solo2"
+                android:id="@+id/top10Duo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="250dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="170dp"
+                android:layout_marginTop="230dp"
                 android:fontFamily="@font/actor"
                 android:text="  "
                 android:textColor="#fff"
@@ -499,8 +499,8 @@
                 android:id="@+id/txtTop25Duo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="200dp"
                 android:layout_marginEnd="235dp"
+                android:layout_marginTop="280dp"
                 android:text="Top 25:"
                 android:textColor="#fff"
                 android:textSize="15dp"
@@ -512,12 +512,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/top25Solo2"
+                android:id="@+id/top25Duo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="200dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="170dp"
+                android:layout_marginTop="280dp"
                 android:fontFamily="@font/actor"
                 android:text="  "
                 android:textColor="#fff"
@@ -533,8 +533,8 @@
                 android:id="@+id/txtKdDuo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="150dp"
                 android:layout_marginEnd="253dp"
+                android:layout_marginTop="330dp"
                 android:text="K/D:"
                 android:textColor="#fff"
                 android:textSize="15dp"
@@ -549,9 +549,9 @@
                 android:id="@+id/kdDuo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="150dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="170dp"
+                android:layout_marginTop="330dp"
                 android:fontFamily="@font/actor"
                 android:text="  "
                 android:textColor="#fff"
@@ -567,8 +567,8 @@
                 android:id="@+id/txtPartiDuo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="100dp"
                 android:layout_marginEnd="167dp"
+                android:layout_marginTop="380dp"
                 android:text="Partidas jugadas:"
                 android:textColor="#fff"
                 android:textSize="15dp"
@@ -583,9 +583,9 @@
                 android:id="@+id/partiDuo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="100dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="170dp"
+                android:layout_marginTop="380dp"
                 android:fontFamily="@font/actor"
                 android:text="  "
                 android:textColor="#fff"
@@ -598,11 +598,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/txtBajas4"
+                android:id="@+id/txtBajasDuo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
                 android:layout_marginEnd="245dp"
+                android:layout_marginTop="430dp"
                 android:text="Bajas:"
                 android:textColor="#fff"
                 android:textSize="15dp"
@@ -617,9 +617,9 @@
                 android:id="@+id/bajasDuo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="170dp"
+                android:layout_marginTop="430dp"
                 android:fontFamily="@font/actor"
                 android:text="  "
                 android:textColor="#fff"
@@ -636,6 +636,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="180dp"
+                android:layout_marginTop="480dp"
                 android:text="Tiempo jugado:"
                 android:textColor="#fff"
                 android:textSize="15dp"
@@ -652,6 +653,311 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="170dp"
+                android:layout_marginTop="480dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtPartidasEs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="150dp"
+                android:layout_marginStart="150dp"
+                android:layout_marginTop="550dp"
+                android:text="Partidas en Escuadrón"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.484" />
+
+            <View
+                android:id="@+id/barra"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="565dp"
+                android:background="#fff"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtScoreEs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="208dp"
+                android:layout_marginTop="525dp"
+                android:text="Puntuación:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/puntuaEs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:layout_marginTop="130dp"
+                android:fontFamily="@font/actor"
+                android:text="Puntuación:  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtWinsEs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="225dp"
+                android:layout_marginTop="180dp"
+                android:text="Victorias:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/winsEs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:layout_marginTop="180dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTop10Es"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="235dp"
+                android:layout_marginTop="230dp"
+                android:text="Top 10:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/top10Es"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:layout_marginTop="230dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTop25Es"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="235dp"
+                android:layout_marginTop="280dp"
+                android:text="Top 25:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/top25Es"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:layout_marginTop="280dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtKdEs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="253dp"
+                android:layout_marginTop="330dp"
+                android:text="K/D:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/kdEs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:layout_marginTop="330dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtPartiEs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="167dp"
+                android:layout_marginTop="380dp"
+                android:text="Partidas jugadas:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/partiEs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:layout_marginTop="380dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtBajasEs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="245dp"
+                android:layout_marginTop="430dp"
+                android:text="Bajas:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/bajasEs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:layout_marginTop="430dp"
+                android:fontFamily="@font/actor"
+                android:text="  "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTjugadoEs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="180dp"
+                android:layout_marginTop="480dp"
+                android:text="Tiempo jugado:"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/jugadoEs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="170dp"
+                android:layout_marginTop="480dp"
                 android:fontFamily="@font/actor"
                 android:text="  "
                 android:textColor="#fff"
@@ -665,8 +971,6 @@
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
-
-
 
 
 </FrameLayout>

@@ -96,7 +96,7 @@ public class PcFragment extends Fragment implements View.OnClickListener, Search
         jugadoDuo = (TextView)v.findViewById(R.id.jugadoDuo);
 
         //barras blancas
-        view1 = (View) v.findViewById(R.id.view1);
+        view1 = (View) v.findViewById(R.id.barra1);
         MenuItem searchItem = menu.findItem(R.id.searchview);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(this);
@@ -175,35 +175,35 @@ public class PcFragment extends Fragment implements View.OnClickListener, Search
 
                             //Variables DUO
 
-                            puntuaSolo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("score").getString("displayValue"));
-                            puntuaSolo.setVisibility(View.VISIBLE);
+                            puntuaDuo.setText(json.getJSONObject("stats").getJSONObject("p10").getJSONObject("score").getString("displayValue"));
+                            puntuaDuo.setVisibility(View.VISIBLE);
 
                             //Victorias duo
-                            winsSolo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("top1").getString("displayValue"));
-                            winsSolo.setVisibility(View.VISIBLE);
+                            winsDuo.setText(json.getJSONObject("stats").getJSONObject("p10").getJSONObject("top1").getString("displayValue"));
+                            winsDuo.setVisibility(View.VISIBLE);
 
                             //Top 10 duo
-                            top10Solo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("top10").getString("displayValue"));
-                            top10Solo.setVisibility(View.VISIBLE);
+                            top10Duo.setText(json.getJSONObject("stats").getJSONObject("p10").getJSONObject("top10").getString("displayValue"));
+                            top10Duo.setVisibility(View.VISIBLE);
 
                             //Top 25 duo
-                            top25Solo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("top25").getString("displayValue"));
-                            top25Solo.setVisibility(View.VISIBLE);
+                            top25Duo.setText(json.getJSONObject("stats").getJSONObject("p10").getJSONObject("top25").getString("displayValue"));
+                            top25Duo.setVisibility(View.VISIBLE);
 
                             //K/d duo
-                            kdSolo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("kd").getString("displayValue"));
-                            kdSolo.setVisibility(View.VISIBLE);
+                            kdDuo.setText(json.getJSONObject("stats").getJSONObject("p10").getJSONObject("kd").getString("displayValue"));
+                            kdDuo.setVisibility(View.VISIBLE);
 
                             //Partidas jugadas duo
-                            partiSolo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("matches").getString("displayValue"));
-                            partiSolo.setVisibility(View.VISIBLE);
+                            partiDuo.setText(json.getJSONObject("stats").getJSONObject("p10").getJSONObject("matches").getString("displayValue"));
+                            partiDuo.setVisibility(View.VISIBLE);
 
                             //Bajas duo
-                            bajasSolo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("kills").getString("displayValue"));
-                            bajasSolo.setVisibility(View.VISIBLE);
+                            bajasDuo.setText(json.getJSONObject("stats").getJSONObject("p10").getJSONObject("kills").getString("displayValue"));
+                            bajasDuo.setVisibility(View.VISIBLE);
 
                             //Tiempo jugado duo
-                            jugadoDuo.setText(json.getJSONObject("stats").getJSONObject("p2").getJSONObject("minutesPlayed").getString("displayValue"));
+                            jugadoDuo.setText(json.getJSONObject("stats").getJSONObject("p10").getJSONObject("minutesPlayed").getString("displayValue"));
                             jugadoDuo.setVisibility(View.VISIBLE);
 
 
