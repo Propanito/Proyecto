@@ -158,8 +158,7 @@ public class PcFragment extends Fragment implements View.OnClickListener, Search
                     @Override
                     public void run() {
 
-                        nomSolo.setText("Jugador no encontrado!");
-                        nomSolo.setVisibility(View.VISIBLE);
+                        nomSolo.setText("No hay internet");
                     }
                 });
             }
