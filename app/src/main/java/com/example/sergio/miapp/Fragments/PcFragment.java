@@ -321,6 +321,8 @@ public class PcFragment extends Fragment implements View.OnClickListener, Search
                         }catch (JSONException  ioe){
                             nomSolo.setText("Jugador no encontrado!");
                             nomSolo.setVisibility(View.VISIBLE);
+                            imagenRandom.setBackgroundResource(R.drawable.error);
+                            imagenRandom.setVisibility(View.VISIBLE);
                         }
                     }
                 });
