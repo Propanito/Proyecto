@@ -3,6 +3,7 @@ package com.example.sergio.miapp;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Checked;
@@ -24,20 +30,23 @@ import java.util.List;
 public class RegistroActivity extends AppCompatActivity implements Validator.ValidationListener {
 
     Validator validator;
-    @Min(value = 5, message = "Debe contener más de 5 letras")
     @NotEmpty(message = "No puede estar en blanco")
-
     private EditText eTRuser;
+
     @Email(message = "Debe ingresar un email válido")
     private EditText eTLemail;
+
     @Password(message = "Debe contener Mayus, num y minuscula", min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
     private EditText eTRpass;
+
     @ConfirmPassword(message = "Las contraseñas no coinciden")
     private EditText eTRrpass;
+
     @Checked(message = "Acepta los términos para poder continuar")
     private CheckBox checkTerm;
-    private Button registrar;
 
+    private Button registrar;
+    FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +64,8 @@ public class RegistroActivity extends AppCompatActivity implements Validator.Val
         validator.setValidationListener(this);
 
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         //Botón registrar
         registrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,14 +78,29 @@ public class RegistroActivity extends AppCompatActivity implements Validator.Val
     public void botonLogin(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 
 
     @Override
     public void onValidationSucceeded() {
-        Toast.makeText(this, "Bienvenido, inicia sesión para continuar!", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
-        startActivity(intent);
+        String userEmail = eTLemail.getText().toString();
+        String userPass = eTRpass.getText().toString();
+
+        firebaseAuth.createUserWithEmailAndPassword(userEmail, userPass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(RegistroActivity.this,"Registro completado, logueate", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }else{
+                    Toast.makeText(RegistroActivity.this,"Error, vuelve a intentarlo", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -91,4 +117,5 @@ public class RegistroActivity extends AppCompatActivity implements Validator.Val
             }
         }
     }
+
 }

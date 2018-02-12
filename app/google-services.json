@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "292403021629",
+    "firebase_url": "https://fortniteapp-88bec.firebaseio.com",
+    "project_id": "fortniteapp-88bec",
+    "storage_bucket": "fortniteapp-88bec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292403021629:android:4040b76715974469",
+        "android_client_info": {
+          "package_name": "com.example.sergio.miapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292403021629-66qeuu3b7gpqpfn4ubm4d0ccclboj5kp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sergio.miapp",
+            "certificate_hash": "dea7383ebf48672c03d6c0db114dfc2e0e2bf645"
+          }
+        },
+        {
+          "client_id": "292403021629-92f9hot3hmcf2ps0cdjm904ea9dk5qgj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9f9EjYlBSrQvuTR_BR-p0u5P26f1grxE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "292403021629-92f9hot3hmcf2ps0cdjm904ea9dk5qgj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
@@ -27,17 +33,19 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
 
     private static String PREFS = "PREFS";
     Validator validator;
-    LottieAnimationView lottieAnimationView,backAnim;
+    LottieAnimationView lottieAnimationView;
     Handler setDelay;
     Runnable startDelay;
     @NotEmpty(message = "No puede estar en blanco")
     @Email(message = "Debe ingresar un email válido")
-    private EditText eTLemail;
+    private EditText userEmail;
     @Password(message = "Debe contener Mayus, num y minuscula", min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
-    private EditText eTLpass;
+    private EditText userPass;
     private CheckBox checkBox;
     private Button login;
     private TextView txtToda, txtReg;
+    FirebaseAuth.AuthStateListener authListener;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +56,12 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
         lottieAnimationView = (LottieAnimationView) findViewById(R.id.loadingAnim);
         lottieAnimationView.useExperimentalHardwareAcceleration(true);
         lottieAnimationView.enableMergePathsForKitKatAndAbove(true);
-        eTLemail = (EditText) findViewById(R.id.eTLemail);
-        eTLpass = (EditText) findViewById(R.id.eTLpass);
+        userEmail = (EditText) findViewById(R.id.eTLemail);
+        userPass = (EditText) findViewById(R.id.eTLpass);
         login = (Button) findViewById(R.id.btnLogin);
         checkBox = (CheckBox) findViewById(R.id.checkBox);
         txtToda = (TextView) findViewById(R.id.txtBajoLogin);
         txtReg = (TextView) findViewById(R.id.Registrar);
-        backAnim = (LottieAnimationView) findViewById(R.id.backAnim);
         setDelay = new Handler();
 
 
@@ -66,6 +73,12 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
         txtReg.setVisibility(View.VISIBLE);
 
         receiveData();
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() != null){
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            finish();
+        }
 
         //Botón login
         login.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +104,7 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
                         validator.validate();
                     }
                 };
-                setDelay.postDelayed(startDelay, 3550);
+                setDelay.postDelayed(startDelay, 2550);
 
 
             }
@@ -104,7 +117,7 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
     /////////////////////////////////////////////////
     /////////////////////////////////////////////////
     public void saveData() {
-        String username = eTLemail.getText().toString();
+        String username = userEmail.getText().toString();
 
         SharedPreferences preferences = getSharedPreferences(PREFS, 0);
         SharedPreferences.Editor editor = preferences.edit();
@@ -116,7 +129,7 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
         SharedPreferences preferences = getSharedPreferences(PREFS, 0);
         String username = preferences.getString("USERNAME", null);
 
-        eTLemail.setText(username);
+        userEmail.setText(username);
     }
     //////////////////////////////////////////////////
     //////////////////////////////////////////////////
@@ -146,11 +159,35 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
             Toast.makeText(LoginActivity.this, "Recordar usuario guardado", Toast.LENGTH_SHORT).show();
         }
 
-        //Introducir aquí código login//
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
-        finish();
+        firebaseAuth.signInWithEmailAndPassword(userEmail.getText().toString(), userPass.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    startDelay = new Runnable() {
+                        @Override
+                        public void run() {
 
+
+                            if (lottieAnimationView.isAnimating()) {
+                                lottieAnimationView.cancelAnimation();
+                                login.setText(getString(R.string.play));
+                            } else {
+                                lottieAnimationView.playAnimation();
+                                login.setText(getString(R.string.pause));
+                            }
+                        }
+                    };
+                    setDelay.postDelayed(startDelay, 2550);
+                    Toast.makeText(LoginActivity.this, "Bienvenido ", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    intent.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 
@@ -181,6 +218,18 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
     //////////////////////////////////////////////////
     //////////////////////////////////////////////////
     //////////////////////////////////////////////////
+    public void onStart(){
+        super.onStart();
+        firebaseAuth.addAuthStateListener(authListener);
+    }
+
+
+    public void onStop(){
+        super.onStop();
+        if (firebaseAuth != null){
+            firebaseAuth.removeAuthStateListener(authListener);
+        }
+    }
 
 
 }
