@@ -22,6 +22,7 @@ import com.example.sergio.miapp.Fragments.PcFragment;
 import com.example.sergio.miapp.Fragments.PsnFragment;
 import com.example.sergio.miapp.Fragments.XboxFragment;
 
+import com.example.sergio.miapp.Opciones.SettingsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -127,6 +128,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.action_settings) {
             //Aquí va el code de opciones
             Toast.makeText(HomeActivity.this, "Botón opciones pulsado", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -139,9 +142,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         FragmentManager fm = getFragmentManager();
         int id = item.getItemId();
 
-        if (id == R.id.nav_pc) {
+        if (id == R.id.                                                                                                                                                                                                                             nav_pc) {
             fm.beginTransaction().replace(R.id.content_frame, new PcFragment()).commit();
-            setTitle("PC");
         } else if (id == R.id.nav_psn) {
             fm.beginTransaction().replace(R.id.content_frame, new PsnFragment()).commit();
         } else if (id == R.id.nav_xbox) {
