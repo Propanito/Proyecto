@@ -6,39 +6,37 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sergio.miapp.Fragments.PcFragment;
 import com.example.sergio.miapp.Fragments.PsnFragment;
 import com.example.sergio.miapp.Fragments.XboxFragment;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import org.w3c.dom.Text;
 
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    FirebaseAuth.AuthStateListener authListener;
     FirebaseAuth firebaseAuth;
+    private TextView email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        email = (TextView) findViewById(R.id.emailFire);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -55,7 +53,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.content_frame, new PcFragment()).commit();
 
-
+        firebaseAuth = FirebaseAuth.getInstance();
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -66,6 +64,35 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         };
+
+
+
+    }
+
+    FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if (user == null) {
+                // user auth state is changed - user is null
+                // launch login activity
+                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                finish();
+            } else {
+                setDataToView(user);
+
+            }
+        }
+
+
+    };
+
+    @SuppressLint("SetTextI18n")
+    private void setDataToView(FirebaseUser user) {
+
+        email.setText("User Email: " + user.getEmail());
+
 
     }
 
@@ -143,4 +170,25 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         };
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        firebaseAuth.addAuthStateListener(authListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (authListener != null) {
+            firebaseAuth.removeAuthStateListener(authListener);
+        }
+    }
+
+
 }

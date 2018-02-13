@@ -218,18 +218,5 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
     //////////////////////////////////////////////////
     //////////////////////////////////////////////////
     //////////////////////////////////////////////////
-    public void onStart(){
-        super.onStart();
-        firebaseAuth.addAuthStateListener(authListener);
-    }
-
-
-    public void onStop(){
-        super.onStop();
-        if (firebaseAuth != null){
-            firebaseAuth.removeAuthStateListener(authListener);
-        }
-    }
-
 
 }
