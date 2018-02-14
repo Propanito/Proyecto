@@ -26,6 +26,7 @@ import com.example.sergio.miapp.Opciones.SettingsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import android.os.Handler;
 
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -48,12 +49,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        //iniciamos navigation drawer
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //cargamos elementos de navigation drawer
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.content_frame, new PcFragment()).commit();
 
+        //recogemos la instancia de firebase, si el usuario no tiene sesion activa le llevará directamente al login.
         firebaseAuth = FirebaseAuth.getInstance();
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -65,6 +69,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         };
+
+
 
 
 
@@ -99,6 +105,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
 
+
+    //Metodo para cerrar el navigation drawer con el botón atras.
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -117,6 +125,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    //Botón opciones, desde aqui elegimos a donde ir al pulsar el botón opciones
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -136,13 +145,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+    //Items para navigation drawer, desde aqui elegimos a donde ir con los botones del navigation
+    /*@SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         FragmentManager fm = getFragmentManager();
         int id = item.getItemId();
 
-        if (id == R.id.                                                                                                                                                                                                                             nav_pc) {
+        if (id == R.id.nav_pc) {
             fm.beginTransaction().replace(R.id.content_frame, new PcFragment()).commit();
         } else if (id == R.id.nav_psn) {
             fm.beginTransaction().replace(R.id.content_frame, new PsnFragment()).commit();
@@ -155,8 +165,42 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }*/
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(final MenuItem item) {
+
+        final FragmentManager fm = getFragmentManager();
+        Handler h = new Handler();
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                switch (item.getItemId()) {
+                    case R.id.nav_pc:
+                        fm.beginTransaction().replace(R.id.content_frame, new PcFragment()).commit();
+                        break;
+                    case R.id.nav_psn:
+                        fm.beginTransaction().replace(R.id.content_frame, new PsnFragment()).commit();
+                        break;
+                    case R.id.nav_xbox:
+                        fm.beginTransaction().replace(R.id.content_frame, new XboxFragment()).commit();
+                        break;
+                    case R.id.nav_salir:
+                        signOut();
+                    default: // do something
+                }
+            }
+
+
+        },350);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+
     }
 
+    //Metodo para cerrar sesión y volver al login
     public void signOut(){
         firebaseAuth.signOut();
         FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {

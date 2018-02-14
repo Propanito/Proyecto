@@ -9,7 +9,13 @@
         <item name="android:colorForeground">@color/colorWhite</item>
         <item name="android:colorBackground">@color/colorPrimary</item>
         <item name="android:textColorPrimaryInverse">@color/colorWhite</item>
+        <item name="android:navigationBarColor">@android:color/background_dark</item>
+        <item name="android:textColorSecondary">@color/colorWhite</item>
+        <item name="android:textColorSecondaryInverse">@color/colorWhite</item>
+        <item name="android:textColorPrimary">@color/colorWhite</item>
+
     </style>
+
 
     <style name="ToolbarColoredBackArror" parent="AppTheme">
         <item name="android:textColorSecondary">#FFF</item>

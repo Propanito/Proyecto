@@ -153,12 +153,13 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
     /////////////////////////////////////////////////
     @Override
     public void onValidationSucceeded() {
-        Toast.makeText(this, "Correcto!", Toast.LENGTH_SHORT).show();
+        //Al pasar la validacion guarda los datos del email
         if (checkBox.isChecked()) {
             saveData();
-            Toast.makeText(LoginActivity.this, "Recordar usuario guardado", Toast.LENGTH_SHORT).show();
+
         }
 
+        //comprueba el usuario y contraseña en la base de datos de firebase e inicia sesión(O no...)
         firebaseAuth.signInWithEmailAndPassword(userEmail.getText().toString(), userPass.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -184,7 +185,18 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
                     startActivity(intent);
                     finish();
                 }else{
-                    Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    lottieAnimationView.setVisibility(View.INVISIBLE);
+                    txtToda.setVisibility(View.VISIBLE);
+                    txtReg.setVisibility(View.VISIBLE);
+                    login.setVisibility(View.VISIBLE);
+                    if (lottieAnimationView.isAnimating()) {
+                        lottieAnimationView.cancelAnimation();
+                        login.setText(getString(R.string.play));
+                    } else {
+                        lottieAnimationView.playAnimation();
+                        login.setText(getString(R.string.pause));
+                    }
+                    Toast.makeText(LoginActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
                 }
             }
         });

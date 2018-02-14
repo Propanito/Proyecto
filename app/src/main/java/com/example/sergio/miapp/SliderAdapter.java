@@ -17,22 +17,22 @@ public class SliderAdapter extends PagerAdapter {
 
     //Lista de imagenes
     public int[] slider_images = {
-            R.drawable.logo1,
-            R.drawable.logo2,
-            R.drawable.logo3,
+            R.drawable.fort1,
+            R.drawable.fort2,
+            R.drawable.fort3,
             R.drawable.logo4
     };
     public String[] slide_headings = {
-            "Texto 1",
-            "Texto 2",
-            "Texto 3",
-            "Texto 4"
+            "Bievenido a FortniteApp",
+            "Usa el buscador",
+            "¿Eres de consolas?",
+            "Gracias por elegirnos"
     };
     public String[] slide_descs = {
-            "Descripcion 1",
-            "Descripcion 2",
-            "Descripcion 3",
-            "Descripcion 4"
+            "Te damos la bievenida a FortniteApp",
+            "Para descubrir tus estadisticas usa el buscador situado en la parte superior de la app",
+            "Desliza el menú de la izquierda y selecciona tu plataforma",
+            "Disfruta de nuestra aplicación"
     };
     Context context;
     LayoutInflater layoutInflater;
