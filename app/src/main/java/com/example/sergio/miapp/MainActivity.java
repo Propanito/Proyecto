@@ -77,11 +77,11 @@ public class MainActivity extends AppCompatActivity {
         firstTime = sharedPreferences.getBoolean("firstTime", true);
 
         if (firstTime) {
-            mSliderViewPager = (ViewPager) findViewById(R.id.slideViewPager);
-            mDotLayout = (LinearLayout) findViewById(R.id.dotsLayout);
+            mSliderViewPager = findViewById(R.id.slideViewPager);
+            mDotLayout = findViewById(R.id.dotsLayout);
 
-            mNextBtn = (Button) findViewById(R.id.nextBtn);
-            mBackBtn = (Button) findViewById(R.id.prevBtn);
+            mNextBtn = findViewById(R.id.nextBtn);
+            mBackBtn = findViewById(R.id.prevBtn);
 
             sliderAdapter = new SliderAdapter(this);
 

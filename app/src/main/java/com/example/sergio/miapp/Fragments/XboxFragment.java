@@ -78,51 +78,51 @@ public class XboxFragment extends Fragment implements View.OnClickListener, Sear
         //Arranque de search
         inflater.inflate(R.menu.search_menu, menu);
         //Variables solo
-        nomSolo = (TextView)v.findViewById(R.id.nombreSolo);
-        puntuaSolo = (TextView)v.findViewById(R.id.puntuaSolo);
-        winsSolo = (TextView)v.findViewById(R.id.winsSolo);
-        top10Solo = (TextView)v.findViewById(R.id.top10Solo);
-        top25Solo = (TextView)v.findViewById(R.id.top25Solo);
-        kdSolo = (TextView)v.findViewById(R.id.kdSolo);
-        partiSolo = (TextView)v.findViewById(R.id.partiSolo);
-        bajasSolo = (TextView)v.findViewById(R.id.bajasSolo);
-        jugadoSolo = (TextView)v.findViewById(R.id.jugadoSolo);
+        nomSolo = v.findViewById(R.id.nombreSolo);
+        puntuaSolo = v.findViewById(R.id.puntuaSolo);
+        winsSolo = v.findViewById(R.id.winsSolo);
+        top10Solo = v.findViewById(R.id.top10Solo);
+        top25Solo = v.findViewById(R.id.top25Solo);
+        kdSolo = v.findViewById(R.id.kdSolo);
+        partiSolo = v.findViewById(R.id.partiSolo);
+        bajasSolo = v.findViewById(R.id.bajasSolo);
+        jugadoSolo = v.findViewById(R.id.jugadoSolo);
 
         //Variables duo
-        puntuaDuo = (TextView)v.findViewById(R.id.puntuaDuo);
-        winsDuo = (TextView)v.findViewById(R.id.winsDuo);
-        top10Duo = (TextView)v.findViewById(R.id.top10Duo);
-        top25Duo = (TextView)v.findViewById(R.id.top25Duo);
-        kdDuo = (TextView)v.findViewById(R.id.kdDuo);
-        partiDuo = (TextView)v.findViewById(R.id.partiDuo);
-        bajasDuo = (TextView)v.findViewById(R.id.bajasDuo);
-        jugadoDuo = (TextView)v.findViewById(R.id.jugadoDuo);
+        puntuaDuo = v.findViewById(R.id.puntuaDuo);
+        winsDuo = v.findViewById(R.id.winsDuo);
+        top10Duo = v.findViewById(R.id.top10Duo);
+        top25Duo = v.findViewById(R.id.top25Duo);
+        kdDuo = v.findViewById(R.id.kdDuo);
+        partiDuo = v.findViewById(R.id.partiDuo);
+        bajasDuo = v.findViewById(R.id.bajasDuo);
+        jugadoDuo = v.findViewById(R.id.jugadoDuo);
 
         //Variables Escuadrón
-        puntuaEs = (TextView)v.findViewById(R.id.puntuaEs);
-        winsEs = (TextView)v.findViewById(R.id.winsEs);
-        top10Es = (TextView)v.findViewById(R.id.top10Es);
-        top25Es = (TextView)v.findViewById(R.id.top25Es);
-        kdEs = (TextView)v.findViewById(R.id.kdEs);
-        partiEs = (TextView)v.findViewById(R.id.partiEs);
-        bajasEs = (TextView)v.findViewById(R.id.bajasEs);
-        jugadoEs = (TextView)v.findViewById(R.id.jugadoEs);
+        puntuaEs = v.findViewById(R.id.puntuaEs);
+        winsEs = v.findViewById(R.id.winsEs);
+        top10Es = v.findViewById(R.id.top10Es);
+        top25Es = v.findViewById(R.id.top25Es);
+        kdEs = v.findViewById(R.id.kdEs);
+        partiEs = v.findViewById(R.id.partiEs);
+        bajasEs = v.findViewById(R.id.bajasEs);
+        jugadoEs = v.findViewById(R.id.jugadoEs);
 
         //Variables Totales
-        puntuaTo = (TextView)v.findViewById(R.id.puntuaTo);
-        winsTo = (TextView)v.findViewById(R.id.winsTo);
-        partiTo = (TextView)v.findViewById(R.id.partiTo);
-        bajasTo = (TextView)v.findViewById(R.id.bajasTo);
-        kdTo = (TextView)v.findViewById(R.id.kdTo);
-        jugadoTo = (TextView)v.findViewById(R.id.jugadoTo);
-        top3To = (TextView)v.findViewById(R.id.top3To);
-        top25To = (TextView)v.findViewById(R.id.top25To);
+        puntuaTo = v.findViewById(R.id.puntuaTo);
+        winsTo = v.findViewById(R.id.winsTo);
+        partiTo = v.findViewById(R.id.partiTo);
+        bajasTo = v.findViewById(R.id.bajasTo);
+        kdTo = v.findViewById(R.id.kdTo);
+        jugadoTo = v.findViewById(R.id.jugadoTo);
+        top3To = v.findViewById(R.id.top3To);
+        top25To = v.findViewById(R.id.top25To);
 
         //barras blancas
-        view1 = (View) v.findViewById(R.id.barra1);
+        view1 = v.findViewById(R.id.barra1);
 
         //Imagen random
-        imagenRandom = (ImageView)v.findViewById(R.id.imageRandom);
+        imagenRandom = v.findViewById(R.id.imageRandom);
 
 
         MenuItem searchItem = menu.findItem(R.id.searchview);

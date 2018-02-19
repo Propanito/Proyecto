@@ -33,24 +33,25 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     FirebaseAuth firebaseAuth;
     private TextView email;
+    private static final int NAVDRAWER_LAUNCH_DELAY = 250;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        email = (TextView) findViewById(R.id.emailFire);
+        email = findViewById(R.id.emailFire);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //Code para pestañas
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         //iniciamos navigation drawer
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         //cargamos elementos de navigation drawer
@@ -64,7 +65,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user == null){
-                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));;
+                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
                     finish();
                 }
             }
@@ -109,7 +110,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     //Metodo para cerrar el navigation drawer con el botón atras.
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -145,32 +146,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
+
+
     //Items para navigation drawer, desde aqui elegimos a donde ir con los botones del navigation
-    /*@SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        FragmentManager fm = getFragmentManager();
-        int id = item.getItemId();
-
-        if (id == R.id.nav_pc) {
-            fm.beginTransaction().replace(R.id.content_frame, new PcFragment()).commit();
-        } else if (id == R.id.nav_psn) {
-            fm.beginTransaction().replace(R.id.content_frame, new PsnFragment()).commit();
-        } else if (id == R.id.nav_xbox) {
-            fm.beginTransaction().replace(R.id.content_frame, new XboxFragment()).commit();
-        } else if (id == R.id.nav_salir) {
-            signOut();
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }*/
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(final MenuItem item) {
-
         final FragmentManager fm = getFragmentManager();
         Handler h = new Handler();
         h.postDelayed(new Runnable() {
@@ -193,11 +174,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
 
 
-        },350);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        },NAVDRAWER_LAUNCH_DELAY);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-
     }
 
     //Metodo para cerrar sesión y volver al login

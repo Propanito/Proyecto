@@ -28,9 +28,9 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        etreset = (EditText) findViewById(R.id.eTreset);
-        btnReset = (Button) findViewById(R.id.btnReset);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        etreset = findViewById(R.id.eTreset);
+        btnReset = findViewById(R.id.btnReset);
+        progressBar = findViewById(R.id.progressBar);
 
 
         auth = FirebaseAuth.getInstance();

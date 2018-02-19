@@ -53,15 +53,15 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
         setContentView(R.layout.activity_login);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        lottieAnimationView = (LottieAnimationView) findViewById(R.id.loadingAnim);
+        lottieAnimationView = findViewById(R.id.loadingAnim);
         lottieAnimationView.useExperimentalHardwareAcceleration(true);
         lottieAnimationView.enableMergePathsForKitKatAndAbove(true);
-        userEmail = (EditText) findViewById(R.id.eTLemail);
-        userPass = (EditText) findViewById(R.id.eTLpass);
-        login = (Button) findViewById(R.id.btnLogin);
-        checkBox = (CheckBox) findViewById(R.id.checkBox);
-        txtToda = (TextView) findViewById(R.id.txtBajoLogin);
-        txtReg = (TextView) findViewById(R.id.Registrar);
+        userEmail = findViewById(R.id.eTLemail);
+        userPass = findViewById(R.id.eTLpass);
+        login = findViewById(R.id.btnLogin);
+        checkBox = findViewById(R.id.checkBox);
+        txtToda = findViewById(R.id.txtBajoLogin);
+        txtReg = findViewById(R.id.Registrar);
         setDelay = new Handler();
 
 

@@ -53,12 +53,12 @@ public class RegistroActivity extends AppCompatActivity implements Validator.Val
         setContentView(R.layout.activity_registro);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        eTRuser = (EditText) findViewById(R.id.eTRuser);
-        eTLemail = (EditText) findViewById(R.id.eTRemail);
-        eTRpass = (EditText) findViewById(R.id.eTRpass);
-        eTRrpass = (EditText) findViewById(R.id.eTRrpass);
-        registrar = (Button) findViewById(R.id.btnRegistrar);
-        checkTerm = (CheckBox) findViewById(R.id.checkTerm);
+        eTRuser = findViewById(R.id.eTRuser);
+        eTLemail = findViewById(R.id.eTRemail);
+        eTRpass = findViewById(R.id.eTRpass);
+        eTRrpass = findViewById(R.id.eTRrpass);
+        registrar = findViewById(R.id.btnRegistrar);
+        checkTerm = findViewById(R.id.checkTerm);
 
         validator = new Validator(this);
         validator.setValidationListener(this);
