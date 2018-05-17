@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Wasted On Fortnite</string>
+    <string name="play">Entrar</string>
+    <string name="pause">Entrar</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Opciones</string>
+    <string name="WoF">Wasted On Fortnite</string>
+    <string name="news_api"><![CDATA[https://fortnitecontent-website-prod07.ol.epicgames.com/content/api/pages/fortnite-game]]></string>
+
+    <!--Strings sobre nosotros -->
+    <string name="about_page_description" translatable="false">Wasted On Fortnite, es una aplicación gratuita donde puedes comprobar estadisticas, armas, tienda de objetos y muchas cosas más.</string>
+    <string name="about_contact_us">Contáctanos</string>
+    <string name="about_play_store">Puntúanos en Play Store</string>
+    <string name="about_twitter">Síguenos en Twitter</string>
+    <string name="about_github">Perfil en GitHub</string>
+    <string name="about_website">Visita nuestra página web</string>
+</resources>
