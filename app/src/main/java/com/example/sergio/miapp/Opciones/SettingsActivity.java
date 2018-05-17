@@ -1,6 +1,7 @@
 package com.example.sergio.miapp.Opciones;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -33,6 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         etreset = findViewById(R.id.eTreset);
         btnReset = findViewById(R.id.btnReset);
         progressBar = findViewById(R.id.progressBar);

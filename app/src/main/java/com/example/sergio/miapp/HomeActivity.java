@@ -123,6 +123,7 @@ public class HomeActivity extends AppCompatActivity  {
                         return false;
                     }
                 })
+                .withTranslucentStatusBar(false)
                 .withSelectedItem(-1)
                 .build();
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);

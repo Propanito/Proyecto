@@ -2,8 +2,10 @@ package com.example.sergio.miapp.Pestañas;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.sergio.miapp.HomeActivity;
 import com.example.sergio.miapp.Model.Card;
 import com.example.sergio.miapp.R;
+import com.mikepenz.materialdrawer.util.KeyboardUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,12 +51,10 @@ public class StateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_state);
-        if (android.os.Build.VERSION.SDK_INT > 9)
-        {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        new KeyboardUtil(this, findViewById(R.id.prueba));
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         toolbar = (Toolbar) findViewById(R.id.toolbarState);
         //Titulo superior
         setSupportActionBar(toolbar);
@@ -138,7 +139,7 @@ public class StateActivity extends AppCompatActivity {
                     try {
                         reader.close();
                     } catch (final IOException e) {
-                        Log.e("NewsActivity", "Error closing stream", e);
+                        Log.e("StateActivity", "Error closing stream", e);
                     }
                 }
             }

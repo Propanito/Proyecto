@@ -11,11 +11,11 @@
         android:roundIcon="@drawable/flogo"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/CustomTheme.NoActionBar">
+        android:theme="@style/CustomTheme">
         <activity
             android:name=".MainActivity"
             android:hardwareAccelerated="true"
-            android:theme="@style/CustomTheme">
+            android:theme="@style/MaterialDrawerTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
