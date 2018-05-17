@@ -22,23 +22,35 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support:support-v4:26.1.0'
-    implementation 'com.google.firebase:firebase-auth:11.8.0'
-    compile 'com.mobsandgeeks:android-saripaar:2.0.2'
-    compile 'com.airbnb.android:lottie:2.5.0-beta3'
-    compile 'com.jakewharton:butterknife:8.1.0'
-    compile 'com.squareup.okhttp3:okhttp:3.7.0'
-    compile 'com.android.support:cardview-v7:26.1.0'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
-    compile 'com.bignerdranch.android:expandablerecyclerview:1.0.3'
-    compile 'com.android.volley:volley:1.0.0'
+    implementation 'com.mobsandgeeks:android-saripaar:2.0.2'
+    implementation 'com.airbnb.android:lottie:2.5.0-beta3'
+    implementation 'com.jakewharton:butterknife:8.1.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
+    implementation 'com.android.support:cardview-v7:26.1.0'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.bignerdranch.android:expandablerecyclerview:1.0.3'
+    implementation 'com.android.volley:volley:1.0.0'
+    implementation "com.android.support:support-annotations:27.1.1"
+
+    //libreria fotos
+    implementation 'com.github.chrisbanes:PhotoView:1.2.6'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+
+    //libreria para pesatña opciones
+    implementation 'com.github.medyo:android-about-page:1.2.4'
+
+    implementation 'com.andrognito.flashbar:flashbar:1.0.2'
+
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation("com.mikepenz:materialdrawer:6.0.7@aar") {
+        transitive = true
+    }
+    implementation 'com.mikepenz:itemanimators:1.0.2@aar'
+    implementation 'com.mikepenz:fontawesome-typeface:5.0.6.0@aar'
 }
-
-
-
-apply plugin: 'com.google.gms.google-services'

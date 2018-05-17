@@ -8,4 +8,31 @@
     <color name="tabtextcolor">#fff</color>
     <color name="tabindicatorcolor">#fff</color>
     <color name="foreground_material_light">#ffffff</color>
+
+    <!--Material dark para el navigation drawer-->
+    <color name="material_drawer_primary">#1a1a1a</color>
+    <color name="material_drawer_primary_dark">#181A24</color>
+    <color name="material_drawer_primary_light">#BBDEFB</color>
+    <color name="material_drawer_accent">#590099</color>
+
+    <color name="material_drawer_dark_background">#303030</color>
+    <!-- MaterialDrawer DEFAULT DARK text / items colors -->
+    <color name="material_drawer_dark_primary_text">#DEFFFFFF</color>
+    <color name="material_drawer_dark_primary_icon">#8AFFFFFF</color>
+    <color name="material_drawer_dark_secondary_text">#8AFFFFFF</color>
+    <color name="material_drawer_dark_hint_text">#42FFFFFF</color>
+    <color name="material_drawer_dark_divider">#1FFFFFFF</color>
+    <!-- MaterialDrawer DEFAULT DARK drawer colors -->
+    <color name="material_drawer_dark_selected">#202020</color>
+    <color name="material_drawer_dark_selected_text">@color/material_drawer_primary</color>
+    <color name="material_drawer_dark_header_selection_text">#FFF</color>
+
+    <!--Colores sobre nosotros -->
+    <color name="about_background_color">#303030</color>
+    <color name="about_separator_color">#494949</color>
+
+    <!-- Text -->
+    <color name="about_description_text_color">#C1C1C1</color>
+    <color name="about_item_text_color">#FFFFFF</color>
+    <color name="about_text_color">#C1C1C1</color>
 </resources>

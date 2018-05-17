@@ -15,18 +15,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.example.sergio.miapp.Opciones.SettingsActivity;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity implements Validator.ValidationListener {
 
@@ -44,8 +52,6 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
     private CheckBox checkBox;
     private Button login;
     private TextView txtToda, txtReg;
-    FirebaseAuth.AuthStateListener authListener;
-    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,14 +77,14 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
         lottieAnimationView.setVisibility(View.INVISIBLE);
         txtToda.setVisibility(View.VISIBLE);
         txtReg.setVisibility(View.VISIBLE);
+        if(SharedPrefManager.getInstance(this).isLoggedIn()){
+            finish();
+            startActivity(new Intent(this, HomeActivity.class));
+            return;
+        }
 
         receiveData();
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        if (firebaseAuth.getCurrentUser() != null){
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-            finish();
-        }
 
         //Botón login
         login.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +98,6 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
                 startDelay = new Runnable() {
                     @Override
                     public void run() {
-
 
                         if (lottieAnimationView.isAnimating()) {
                             lottieAnimationView.cancelAnimation();
@@ -117,19 +122,19 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
     /////////////////////////////////////////////////
     /////////////////////////////////////////////////
     public void saveData() {
-        String username = userEmail.getText().toString();
+        String usernamee = userEmail.getText().toString();
 
         SharedPreferences preferences = getSharedPreferences(PREFS, 0);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("USERNAME", username);
+        editor.putString("USERNAME", usernamee);
         editor.commit();
     }
 
     public void receiveData() {
         SharedPreferences preferences = getSharedPreferences(PREFS, 0);
-        String username = preferences.getString("USERNAME", null);
+        String usernamee = preferences.getString("USERNAME", null);
 
-        userEmail.setText(username);
+        userEmail.setText(usernamee);
     }
     //////////////////////////////////////////////////
     //////////////////////////////////////////////////
@@ -151,6 +156,7 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
     ///////////funciones para validar login//////////
     /////////////////////////////////////////////////
     /////////////////////////////////////////////////
+    //si la validación es buena
     @Override
     public void onValidationSucceeded() {
         //Al pasar la validacion guarda los datos del email
@@ -159,50 +165,113 @@ public class LoginActivity extends AppCompatActivity implements Validator.Valida
 
         }
 
-        //comprueba el usuario y contraseña en la base de datos de firebase e inicia sesión(O no...)
-        firebaseAuth.signInWithEmailAndPassword(userEmail.getText().toString(), userPass.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    startDelay = new Runnable() {
-                        @Override
-                        public void run() {
+        final String username = userEmail.getText().toString();
+        final String password = userPass.getText().toString();
 
-
-                            if (lottieAnimationView.isAnimating()) {
-                                lottieAnimationView.cancelAnimation();
-                                login.setText(getString(R.string.play));
-                            } else {
-                                lottieAnimationView.playAnimation();
-                                login.setText(getString(R.string.pause));
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                Constants.URL_LOGIN,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            boolean success = obj.getBoolean("success");
+                            if(success){
+                                SharedPrefManager.getInstance(getApplicationContext())
+                                        .userLogin(
+                                                obj.getString("name"),
+                                                obj.getString("username")
+                                        );
+                                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                                Toast.makeText(LoginActivity.this, "Bienvenido", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }else{
+                                lottieAnimationView.setVisibility(View.INVISIBLE);
+                                txtToda.setVisibility(View.VISIBLE);
+                                txtReg.setVisibility(View.VISIBLE);
+                                login.setVisibility(View.VISIBLE);
+                                if (lottieAnimationView.isAnimating()) {
+                                    lottieAnimationView.cancelAnimation();
+                                    login.setText(getString(R.string.play));
+                                } else {
+                                    lottieAnimationView.playAnimation();
+                                    login.setText(getString(R.string.pause));
+                                }
+                                Toast.makeText(LoginActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    };
-                    setDelay.postDelayed(startDelay, 2550);
-                    Toast.makeText(LoginActivity.this, "Bienvenido ", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    intent.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
-                    startActivity(intent);
-                    finish();
-                }else{
-                    lottieAnimationView.setVisibility(View.INVISIBLE);
-                    txtToda.setVisibility(View.VISIBLE);
-                    txtReg.setVisibility(View.VISIBLE);
-                    login.setVisibility(View.VISIBLE);
-                    if (lottieAnimationView.isAnimating()) {
-                        lottieAnimationView.cancelAnimation();
-                        login.setText(getString(R.string.play));
-                    } else {
-                        lottieAnimationView.playAnimation();
-                        login.setText(getString(R.string.pause));
                     }
-                    Toast.makeText(LoginActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Toast.makeText(
+                                getApplicationContext(),
+                                error.getMessage(),
+                                Toast.LENGTH_LONG
+                        ).show();
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", username);
+                params.put("password", password);
+                return params;
+            }
+
+        };
+
+        RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+
+        /* Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
+
+
+                    if (success) {
+
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(LoginActivity.this, "Bienvenido", Toast.LENGTH_SHORT).show();
+                        finish();
+
+                    } else {
+                        lottieAnimationView.setVisibility(View.INVISIBLE);
+                        txtToda.setVisibility(View.VISIBLE);
+                        txtReg.setVisibility(View.VISIBLE);
+                        login.setVisibility(View.VISIBLE);
+                        if (lottieAnimationView.isAnimating()) {
+                            lottieAnimationView.cancelAnimation();
+                            login.setText(getString(R.string.play));
+                        } else {
+                            lottieAnimationView.playAnimation();
+                            login.setText(getString(R.string.pause));
+                        }
+                        Toast.makeText(LoginActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
-        });
+
+        };
+        LoginRequest loginRequest = new LoginRequest(username, password, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+        queue.add(loginRequest);*/
     }
 
 
+    //Si la validacion falla.
     @Override
     public void onValidationFailed(List<ValidationError> errors) {
         for (ValidationError error : errors) {

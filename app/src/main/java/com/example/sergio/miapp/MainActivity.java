@@ -74,6 +74,13 @@ public class MainActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE);
 
+        if(SharedPrefManager.getInstance(this).isLoggedIn()){
+
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
+            return;
+        }
+
         firstTime = sharedPreferences.getBoolean("firstTime", true);
 
         if (firstTime) {

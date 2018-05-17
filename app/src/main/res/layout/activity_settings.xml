@@ -8,12 +8,10 @@
     android:background="#1a1a1a"
     app:title="Opciones">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/app_bar_main"
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbarOpciones"/>
     <TextView
         android:id="@+id/txtConfirm"
         android:layout_width="0dp"
@@ -24,7 +22,6 @@
         android:fontFamily="@font/actor"
         android:text="Escribe debajo tu correo electronico para que podamos mandarte un reinicio de contraseña"
         android:textColor="#fff"
-        app:layout_constraintBottom_toBottomOf="@+id/include"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -84,7 +81,6 @@
         android:layout_marginStart="40dp"
         android:background="@drawable/background_login"
         android:elevation="16dp"
-        android:onClick="btnReset"
         android:text="Enviar"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"

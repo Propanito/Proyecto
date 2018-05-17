@@ -23,16 +23,16 @@ public class SliderAdapter extends PagerAdapter {
             R.drawable.logo4
     };
     public String[] slide_headings = {
-            "Bievenido a FortniteApp",
-            "Usa el buscador",
-            "¿Eres de consolas?",
-            "Gracias por elegirnos"
+            "¡Empezamos!",
+            "Busca tus estadisticas",
+            "Últimas noticias",
+            "Estado de servidores"
     };
     public String[] slide_descs = {
-            "Te damos la bievenida a FortniteApp",
-            "Para descubrir tus estadisticas usa el buscador situado en la parte superior de la app",
-            "Desliza el menú de la izquierda y selecciona tu plataforma",
-            "Disfruta de nuestra aplicación"
+            "Bienvenido a Wasted On Fortnite",
+            "Usa el buscador para conocer tus estadisticas",
+            "Conoce las últimas actualizaciones de Fortnite",
+            "Averigua si los servidores están caidos"
     };
     Context context;
     LayoutInflater layoutInflater;

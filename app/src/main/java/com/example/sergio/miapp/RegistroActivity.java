@@ -11,11 +11,13 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Checked;
@@ -25,7 +27,12 @@ import com.mobsandgeeks.saripaar.annotation.Min;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RegistroActivity extends AppCompatActivity implements Validator.ValidationListener {
 
@@ -46,7 +53,6 @@ public class RegistroActivity extends AppCompatActivity implements Validator.Val
     private CheckBox checkTerm;
 
     private Button registrar;
-    FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +69,6 @@ public class RegistroActivity extends AppCompatActivity implements Validator.Val
         validator = new Validator(this);
         validator.setValidationListener(this);
 
-
-        firebaseAuth = FirebaseAuth.getInstance();
 
         //Botón registrar
         registrar.setOnClickListener(new View.OnClickListener() {
@@ -84,23 +88,70 @@ public class RegistroActivity extends AppCompatActivity implements Validator.Val
 
     @Override
     public void onValidationSucceeded() {
-        String userEmail = eTLemail.getText().toString();
-        String userPass = eTRpass.getText().toString();
+        final String name = eTRuser.getText().toString();
+        final String username = eTLemail.getText().toString();
+        final String password = eTRpass.getText().toString();
 
-        firebaseAuth.createUserWithEmailAndPassword(userEmail, userPass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                Constants.URL_REGISTER,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            Toast.makeText(RegistroActivity.this,"Registro completado, Inicia sesión", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    Toast.makeText(RegistroActivity.this,"Registro completado, logueate", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("name", name);
+                params.put("username", username);
+                params.put("password", password);
+                return params;
+            }
+        };
 
-                }else{
-                    Toast.makeText(RegistroActivity.this,"Error, vuelve a intentarlo", Toast.LENGTH_SHORT).show();
+
+        RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+       /* Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
+                    if (success) {
+                        Toast.makeText(RegistroActivity.this,"Registro completado, logueate", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(RegistroActivity.this,"Error, vuelve a intentarlo", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
-        });
+        };
+
+        RegisterRequest registerRequest = new RegisterRequest(name, username, password, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(RegistroActivity.this);
+        queue.add(registerRequest);*/
+
+
     }
 
     @Override

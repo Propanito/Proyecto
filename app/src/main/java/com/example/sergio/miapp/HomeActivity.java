@@ -1,220 +1,199 @@
 package com.example.sergio.miapp;
 
-import android.annotation.SuppressLint;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sergio.miapp.Fragments.PcFragment;
-import com.example.sergio.miapp.Fragments.PsnFragment;
-import com.example.sergio.miapp.Fragments.XboxFragment;
-
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.sergio.miapp.Opciones.SettingsActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.sergio.miapp.Pestañas.ArmasActivity;
+import com.example.sergio.miapp.Pestañas.MapaActivity;
+import com.example.sergio.miapp.Pestañas.NewsActivity;
+import com.example.sergio.miapp.Pestañas.StateActivity;
+import com.example.sergio.miapp.Pestañas.TiendaActivity;
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
-import android.os.Handler;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity  {
 
-    FirebaseAuth firebaseAuth;
-    private TextView email;
-    private static final int NAVDRAWER_LAUNCH_DELAY = 250;
+    private Drawer result = null;
+    private AccountHeader headerResult = null;
+    private EditText buscar;
+    private TextView resultado;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        email = findViewById(R.id.emailFire);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        if(!SharedPrefManager.getInstance(this).isLoggedIn()){
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+
+        buscar = (EditText) findViewById(R.id.bpEdit);
+        resultado = (TextView) findViewById(R.id.bpText);
+        toolbar = (Toolbar) findViewById(R.id.toolbarHome);
+        //Titulo superior (se queda
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Buscar perfil");
+        // Create the AccountHeader
+        AccountHeader headerResult = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withSavedInstance(savedInstanceState)
+                .withHeaderBackground(R.drawable.header)
+                .build();
 
-        //Code para pestañas
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+        //if you want to update the items at a later time it is recommended to keep it in a variable
+        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Buscar perfil").withIcon(FontAwesome.Icon.faw_id_card);
+        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("Mapa").withIcon(FontAwesome.Icon.faw_map);
+        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName("Noticias").withIcon(FontAwesome.Icon.faw_newspaper);
+        PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName("Estado de servidor").withIcon(FontAwesome.Icon.faw_server);
+        PrimaryDrawerItem item5 = new PrimaryDrawerItem().withIdentifier(5).withName("Armas").withIcon(FontAwesome.Icon.faw_fighter_jet);
+        PrimaryDrawerItem item6 = new PrimaryDrawerItem().withIdentifier(6).withName("Tienda").withIcon(FontAwesome.Icon.faw_shopping_cart);
+        PrimaryDrawerItem item7 = new PrimaryDrawerItem().withIdentifier(7).withName("Opciones").withIcon(FontAwesome.Icon.faw_filter);
+        PrimaryDrawerItem item8 = new PrimaryDrawerItem().withIdentifier(8).withName("Cerrar sesión").withIcon(FontAwesome.Icon.faw_sign_out_alt);
 
-        //iniciamos navigation drawer
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        //create the drawer and remember the `Drawer` result object
+        result = new DrawerBuilder()
+                .withActivity(this)
+                .withAccountHeader(headerResult)
+                .withToolbar(toolbar)
+                .addDrawerItems(
+                        item1,item2,item3,item4,item5,item6,
+                        new DividerDrawerItem(),
+                        item7,
+                        item8
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        if (drawerItem != null) {
+                            Intent intent = null;
+                            if (drawerItem.getIdentifier() == 2) {
+                                intent = new Intent(HomeActivity.this, MapaActivity.class);
+                            } else if (drawerItem.getIdentifier() == 3) {
+                                intent = new Intent(HomeActivity.this, NewsActivity.class);
+                            } else if (drawerItem.getIdentifier() == 4) {
+                                intent = new Intent(HomeActivity.this, StateActivity.class);
+                            } else if (drawerItem.getIdentifier() == 5) {
+                                intent = new Intent(HomeActivity.this, ArmasActivity.class);
+                            } else if (drawerItem.getIdentifier() == 6) {
+                                intent = new Intent(HomeActivity.this, TiendaActivity.class);
+                            } else if (drawerItem.getIdentifier() == 7) {
+                                intent = new Intent(HomeActivity.this, SettingsActivity.class);
+                            } else if (drawerItem.getIdentifier() == 8) {
+                                SharedPrefManager.getInstance(HomeActivity.this).logout();
+                                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                                finish();
+                            }
+                            if (intent != null) {
+                                HomeActivity.this.startActivity(intent);
+                                finish();
+                            }
+                        }
 
-        //cargamos elementos de navigation drawer
-        FragmentManager fm = getFragmentManager();
-        fm.beginTransaction().replace(R.id.content_frame, new PcFragment()).commit();
+                        return false;
+                    }
+                })
+                .withSelectedItem(-1)
+                .build();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
-        //recogemos la instancia de firebase, si el usuario no tiene sesion activa le llevará directamente al login.
-        firebaseAuth = FirebaseAuth.getInstance();
-        authListener = new FirebaseAuth.AuthStateListener() {
+
+
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    private void buscarPerfil(){
+        final String name = buscar.getText().toString();
+        String url = "https://wastedonfortnite.000webhostapp.com/connect/fortniteapi.php";
+
+        RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
+                new Response.Listener<String>() {
+                    @Override
+
+                    public void onResponse(String response) {
+
+                        try {
+                            JSONObject json = new JSONObject(response);
+                            resultado.setText(json.getString("username"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null){
-                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-                    finish();
-                }
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", name);
+                return params;
             }
         };
 
 
-
-
-
+        MyRequestQueue.add(stringRequest);
     }
-
-    FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
-        @SuppressLint("SetTextI18n")
-        @Override
-        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            if (user == null) {
-                // user auth state is changed - user is null
-                // launch login activity
-                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-                finish();
-            } else {
-                setDataToView(user);
-
-            }
-        }
-
-
-    };
-
-    @SuppressLint("SetTextI18n")
-    private void setDataToView(FirebaseUser user) {
-
-        email.setText("User Email: " + user.getEmail());
-
-
-    }
-
-
-
-
-    //Metodo para cerrar el navigation drawer con el botón atras.
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        //handle the back press :D close the drawer first and if the drawer is closed close the activity
+        if (result != null && result.isDrawerOpen()) {
+            result.closeDrawer();
         } else {
             super.onBackPressed();
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    public void bpClick(View view) {
+        buscarPerfil();
     }
-
-
-    //Botón opciones, desde aqui elegimos a donde ir al pulsar el botón opciones
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            //Aquí va el code de opciones
-            Toast.makeText(HomeActivity.this, "Botón opciones pulsado", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
-            startActivity(intent);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
-    //Items para navigation drawer, desde aqui elegimos a donde ir con los botones del navigation
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(final MenuItem item) {
-        final FragmentManager fm = getFragmentManager();
-        Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                switch (item.getItemId()) {
-                    case R.id.nav_pc:
-                        fm.beginTransaction().replace(R.id.content_frame, new PcFragment()).commit();
-                        break;
-                    case R.id.nav_psn:
-                        fm.beginTransaction().replace(R.id.content_frame, new PsnFragment()).commit();
-                        break;
-                    case R.id.nav_xbox:
-                        fm.beginTransaction().replace(R.id.content_frame, new XboxFragment()).commit();
-                        break;
-                    case R.id.nav_salir:
-                        signOut();
-                    default: // do something
-                }
-            }
-
-
-        },NAVDRAWER_LAUNCH_DELAY);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    //Metodo para cerrar sesión y volver al login
-    public void signOut(){
-        firebaseAuth.signOut();
-        FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null) {
-                    // user auth state is changed - user is null
-                    // launch login activity
-                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-                    finish();
-                }
-            }
-        };
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        firebaseAuth.addAuthStateListener(authListener);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (authListener != null) {
-            firebaseAuth.removeAuthStateListener(authListener);
-        }
-    }
-
-
 }

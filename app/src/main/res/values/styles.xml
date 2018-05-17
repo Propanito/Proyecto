@@ -1,28 +1,24 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:colorForeground">@color/colorWhite</item>
-        <item name="android:colorBackground">@color/colorPrimary</item>
-        <item name="android:textColorPrimaryInverse">@color/colorWhite</item>
-        <item name="android:navigationBarColor">@android:color/background_dark</item>
-        <item name="android:textColorSecondary">@color/colorWhite</item>
-        <item name="android:textColorSecondaryInverse">@color/colorWhite</item>
-        <item name="android:textColorPrimary">@color/colorWhite</item>
 
+    <style name="CustomTheme" parent="MaterialDrawerTheme.TranslucentStatus">
+        <!-- ...and here we setting appcompat’s color theme attrs -->
+        <item name="colorPrimary">#FFB831BF</item>
+        <item name="colorPrimaryDark">#802d84</item>
+        <item name="colorAccent">#FFB831BF</item>
+
+        <!-- MaterialDrawer specific values -->
+        <item name="material_drawer_background">@color/material_drawer_dark_background</item>
+        <item name="material_drawer_primary_text">@color/material_drawer_dark_primary_text</item>
+        <item name="material_drawer_secondary_text">@color/material_drawer_secondary_text</item>
+        <item name="material_drawer_hint_text">@color/material_drawer_dark_hint_text</item>
+        <item name="material_drawer_divider">@color/material_drawer_dark_divider</item>
+        <item name="material_drawer_selected">@color/material_drawer_dark_selected</item>
+        <item name="material_drawer_selected_text">#b831bf</item>
+        <item name="material_drawer_header_selection_text">@color/material_drawer_dark_primary_text</item>
+
+        <!-- CAB :D -->
+        <item name="windowActionModeOverlay">true</item>
     </style>
-
-
-    <style name="ToolbarColoredBackArror" parent="AppTheme">
-        <item name="android:textColorSecondary">#FFF</item>
-    </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="Theme.AppCompat.Light.NoActionBar" />
-
 </resources>
