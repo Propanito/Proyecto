@@ -8,7 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.example.sergio.miapp.HomeActivity;
+import com.example.sergio.miapp.LoginActivity;
 import com.example.sergio.miapp.R;
+import com.example.sergio.miapp.SharedPrefManager;
 
 public class ArmasActivity extends AppCompatActivity {
 
@@ -18,6 +20,10 @@ public class ArmasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_armas);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        if(!SharedPrefManager.getInstance(this).isLoggedIn()){
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
         toolbar = (Toolbar) findViewById(R.id.toolbarArmas);
         //Titulo superior
         setSupportActionBar(toolbar);

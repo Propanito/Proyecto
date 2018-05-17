@@ -22,8 +22,10 @@ import com.andrognito.flashbar.anim.FlashAnim;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.example.sergio.miapp.HomeActivity;
+import com.example.sergio.miapp.LoginActivity;
 import com.example.sergio.miapp.Model.Card;
 import com.example.sergio.miapp.R;
+import com.example.sergio.miapp.SharedPrefManager;
 import com.mikepenz.materialdrawer.util.KeyboardUtil;
 
 import org.json.JSONArray;
@@ -52,6 +54,10 @@ public class StateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_state);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        if(!SharedPrefManager.getInstance(this).isLoggedIn()){
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
         new KeyboardUtil(this, findViewById(R.id.prueba));
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);

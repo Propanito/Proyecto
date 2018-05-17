@@ -8,6 +8,7 @@
     <string name="WoF">Wasted On Fortnite</string>
     <string name="news_api"><![CDATA[https://fortnitecontent-website-prod07.ol.epicgames.com/content/api/pages/fortnite-game]]></string>
     <string name="state_api"><![CDATA[https://lightswitch-public-service-prod06.ol.epicgames.com/lightswitch/api/service/bulk/status?serviceId=Fortnite]]></string>
+    <string name="tienda_api"><![CDATA[https://fortnite.y3n.co/v2/shop]]></string>
 
     <!--Strings sobre nosotros -->
     <string name="about_page_description" translatable="false">Wasted On Fortnite, es una aplicación gratuita donde puedes comprobar estadisticas, armas, tienda de objetos y muchas cosas más.</string>
