@@ -127,29 +127,6 @@ public class RegistroActivity extends AppCompatActivity implements Validator.Val
 
 
         RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
-       /* Response.Listener<String> responseListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    boolean success = jsonResponse.getBoolean("success");
-                    if (success) {
-                        Toast.makeText(RegistroActivity.this,"Registro completado, logueate", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(RegistroActivity.this,"Error, vuelve a intentarlo", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        RegisterRequest registerRequest = new RegisterRequest(name, username, password, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(RegistroActivity.this);
-        queue.add(registerRequest);*/
 
 
     }

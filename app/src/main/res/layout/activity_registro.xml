@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back1"
+    android:background="#a34b4b4b"
     tools:context="com.example.sergio.miapp.RegistroActivity">
 
     <EditText

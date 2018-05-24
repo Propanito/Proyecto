@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back1"
+    android:background="#a34b4b4b"
     tools:context="com.example.sergio.miapp.LoginActivity">
 
 
@@ -49,11 +49,11 @@
         android:layout_marginEnd="40dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
-        android:background="#fff"
+        android:background="#FFB831BF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></View>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -93,11 +93,11 @@
         android:layout_marginEnd="40dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="140dp"
-        android:background="#fff"
+        android:background="#FFB831BF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></View>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -120,10 +120,10 @@
         android:layout_marginEnd="140dp"
         android:layout_marginTop="200dp"
         android:background="@android:color/transparent"
-        android:buttonTint="@color/colorWhite"
+        android:buttonTint="#FFB831BF"
         android:text="Recordar email         "
         android:textColor="@color/colorWhite"
-        android:textColorHint="@color/colorWhite"
+        android:textColorHint="#FFB831BF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -185,7 +185,7 @@
         android:layout_marginTop="400dp"
         android:onClick="botonRegistrar"
         android:text="Regístrate"
-        android:textColor="#27c74f"
+        android:textColor="#FFB831BF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

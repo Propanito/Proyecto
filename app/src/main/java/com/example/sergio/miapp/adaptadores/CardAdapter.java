@@ -36,6 +36,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardHolder> {
 
         holder.setTitle(card.getTitle());
         holder.setBody(card.getBody());
+        holder.setDate(card.getDate());
 
         Glide.with(mACtivity)
                 .load(card.getImg())
@@ -52,8 +53,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardHolder> {
 
     public class CardHolder extends RecyclerView.ViewHolder {
         ImageView imgView;
-        TextView titleTextView;
-        TextView bodyTextView;
+        TextView titleTextView, dateTextView, bodyTextView;
+
+
 
         public CardHolder(View itemView) {
             super(itemView);
@@ -61,6 +63,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardHolder> {
             imgView = (ImageView) itemView.findViewById(R.id.imgView);
             titleTextView = (TextView) itemView.findViewById(R.id.textview_card_name);
             bodyTextView = (TextView) itemView.findViewById(R.id.card_body_textview);
+            dateTextView = (TextView) itemView.findViewById(R.id.fecha);
         }
 
         public void setTitle(String title) {
@@ -70,6 +73,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardHolder> {
         public void setBody(String body) {
             bodyTextView.setText(body);
         }
+
+        public void setDate(String date){
+            dateTextView.setText(date);
+        }
+
+
 
 
     }

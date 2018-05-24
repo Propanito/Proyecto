@@ -1,19 +1,21 @@
 package com.example.sergio.miapp.Model;
 
+
 public class Card {
     private String title;
     private String body;
     private String img;
-
+    private String date;
 
     public Card() {
     }
 
-    public Card(String title, String body, String img) {
+    public Card(String title, String body, String img, String date) {
 
         this.title = title;
         this.body = body;
         this.img = img;
+        this.date = date;
     }
 
     public String getTitle() {
@@ -41,6 +43,14 @@ public class Card {
 
     public void setImageUrl(String imageUrl) {
         this.img = imageUrl;
+    }
+
+    public String getDate(){
+        return date;
+    }
+
+    public void setDate(String date){
+        this.date = date;
     }
 
 }

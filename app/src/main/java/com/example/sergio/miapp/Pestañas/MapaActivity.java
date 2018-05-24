@@ -13,9 +13,8 @@ import com.example.sergio.miapp.HomeActivity;
 import com.example.sergio.miapp.LoginActivity;
 import com.example.sergio.miapp.R;
 import com.example.sergio.miapp.SharedPrefManager;
+import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.mikepenz.materialdrawer.Drawer;
-
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class MapaActivity extends AppCompatActivity {
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,14 +13,23 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.example.sergio.miapp.Constants;
 import com.example.sergio.miapp.HomeActivity;
 import com.example.sergio.miapp.LoginActivity;
 import com.example.sergio.miapp.Model.Card;
 import com.example.sergio.miapp.R;
+import com.example.sergio.miapp.RequestHandler;
 import com.example.sergio.miapp.SharedPrefManager;
 import com.example.sergio.miapp.adaptadores.CardAdapter;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +42,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class NewsActivity extends AppCompatActivity {
 
@@ -40,6 +56,13 @@ public class NewsActivity extends AppCompatActivity {
     private CardAdapter mAdapter;
     private ArrayList<Card> mCardCollection;
     Toolbar toolbar;
+    String sendTitle;
+    String sendBody;
+    String sendImgUrl;
+    String sendFecha;
+    LinearLayoutManager manager;
+    int currentItems, totalItems, scrollOutItems;
+    ProgressBar progressBBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +88,7 @@ public class NewsActivity extends AppCompatActivity {
 
         init();
         new FetchDataTask().execute();
+
     }
 
     private void init() {
@@ -74,11 +98,11 @@ public class NewsActivity extends AppCompatActivity {
         mCardCollection = new ArrayList<>();
         mAdapter = new CardAdapter(mCardCollection, this);
         mCardRecyclerView.setAdapter(mAdapter);
+
     }
 
     public class FetchDataTask extends AsyncTask<Void, Void, Void> {
                 private String mNewsString;
-
                 @Override
                 protected Void doInBackground(Void... params) {
                     HttpURLConnection urlConnection = null;
@@ -86,9 +110,13 @@ public class NewsActivity extends AppCompatActivity {
                     Uri builtUri = Uri.parse(getString(R.string.news_api));
                     URL url;
                     try {
+                        String title;
+                        String body;
+                        String imgUrl;
+                        String date;
                         url = new URL(builtUri.toString());
                         urlConnection = (HttpURLConnection) url.openConnection();
-                        urlConnection.setRequestMethod("POST");
+                        urlConnection.setRequestMethod("GET");
                         urlConnection.setRequestProperty("Accept-Language", "es-ES,es;q=0.5");
                         urlConnection.connect();
 
@@ -111,42 +139,42 @@ public class NewsActivity extends AppCompatActivity {
                         }
 
                         mNewsString = buffer.toString();
-                        JSONObject e = new JSONObject(mNewsString).getJSONObject("battleroyalenews").getJSONObject("news");
+                        JSONObject e = new JSONObject(mNewsString).getJSONObject("battleroyalenews");
+                        date = e.getString("lastModified");
+                        String fechasubString = date.substring(0, 10);
 
-                        JSONArray cardsArray = e.getJSONArray("messages");
-
-
+                        JSONObject f = e.getJSONObject("news");
+                        JSONArray cardsArray = f.getJSONArray("messages");
                         //list = new ArrayList<>();
                         for (int i = 0; i < cardsArray.length(); i++) {
 
                             Log.v("BRAD_", i + "");
-                            String title;
-                            String body;
-                            String imgUrl;
-
-
                             JSONObject jCard = (JSONObject) cardsArray.get(i);
-                    /*
-                    jCard = jCard.getJSONObject("restaurant");
-                    JSONObject jLocattion = jCard.getJSONObject("location");
-                    JSONObject jRating = jCard.getJSONObject("user_rating");^*/
-
-
                             title = jCard.getString("title");
                             body = jCard.getString("body");
                             imgUrl = jCard.getString("image");
-
 
                             Card card = new Card();
                             card.setTitle(title);
                             card.setBody(body);
                             card.setImg(imgUrl);
-
-
-
-
+                            card.setDate(fechasubString);
                             mCardCollection.add(card);
+
                         }
+                        //Guardar noticias
+                        for (int i = 0; i < 3;i++) {
+
+                            Log.v("BRAD_", i + "");
+                            JSONObject mJsonObject = cardsArray.getJSONObject(i);
+                            sendTitle = mJsonObject.getString("title");
+                            sendBody = mJsonObject.getString("body");
+                            sendImgUrl = mJsonObject.getString("image");
+                            String recogerFecha = e.getString("lastModified").toString();
+                            sendFecha = recogerFecha.substring(0, 10);
+
+                        }
+
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
@@ -171,12 +199,46 @@ public class NewsActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             mAdapter.notifyDataSetChanged();
+            enviarNoticias();
+
+
         }
     }
 
+    public void enviarNoticias(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                Constants.URL_STORE,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            Toast.makeText(NewsActivity.this,"Datos guardados", Toast.LENGTH_SHORT).show();
 
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("title", sendTitle);
+                params.put("body", sendBody);
+                params.put("imgUrl", sendImgUrl);
+                params.put("date", sendFecha);
+                return params;
+            }
+        };
 
-
+        RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

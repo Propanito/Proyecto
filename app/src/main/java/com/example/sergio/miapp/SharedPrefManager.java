@@ -11,6 +11,9 @@ public class SharedPrefManager {
     private static final String SHARED_PREF_NAME = "WOF";
     private static final String KEY_USERNAME = "name";
     private static final String KEY_USER_EMAIL = "username";
+    private static final String KEY_TITLE = "title";
+    private static final String KEY_BODY = "body";
+    private static final String KEY_IMGURL = "imgUrl";
 
     private SharedPrefManager(Context context) {
         mCtx = context;
@@ -31,6 +34,21 @@ public class SharedPrefManager {
 
         editor.putString(KEY_USERNAME, name);
         editor.putString(KEY_USER_EMAIL, username);
+
+
+        editor.apply();
+
+        return true;
+    }
+
+    public boolean recibirNoticias( String title, String body, String imgUrl){
+
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(KEY_TITLE, title);
+        editor.putString(KEY_BODY, body);
+        editor.putString(KEY_IMGURL, imgUrl);
 
 
         editor.apply();
